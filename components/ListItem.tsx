@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaPlay } from "react-icons/fa";
 
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
 
 interface ListItemProps {
   image: string;
@@ -17,9 +19,13 @@ const ListItem: React.FC<ListItemProps> = ({
   href,
 }) => {
   const router = useRouter();
-
+  const authModal = useAuthModal();
+  const { user } = useUser();
   
   const onClick = () => {
+    if (!user) {
+      return authModal.onOpen();
+    }
 
     router.push(href);
   };
@@ -67,7 +73,7 @@ const ListItem: React.FC<ListItemProps> = ({
           drop-shadow-md 
           right-5
           group-hover:opacity-100 
-          hover:scale-90
+          hover:scale-110
         "
       >
         <FaPlay className="text-black" />
