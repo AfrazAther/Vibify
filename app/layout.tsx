@@ -1,15 +1,15 @@
 import { Figtree } from 'next/font/google'
 
 import getSongsByUserId from '@/actions/getSongsByUserId'
-import getActiveProductsWithPrices from '@/actions/getActiveProductsWithPrices'
+
 import Sidebar from '@/components/Sidebar'
 import ToasterProvider from '@/providers/ToasterProvider'
 import UserProvider from '@/providers/UserProvider'
-import ModalProvider from '@/providers/ModalProvider'
 import SupabaseProvider from '@/providers/SupabaseProvider'
 
 
 import './globals.css'
+import Player from '@/components/Player'
 
 const font = Figtree({ subsets: ['latin'] })
 
@@ -25,7 +25,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const products = await getActiveProductsWithPrices();
+
   const userSongs = await getSongsByUserId();
 
   return (
@@ -33,11 +33,11 @@ export default async function RootLayout({
       <body className={font.className}>
         <ToasterProvider />
         <SupabaseProvider>
-          <UserProvider>
-            <ModalProvider products={products} />
+          <UserProvider>            
             <Sidebar songs={userSongs}>
               {children}
-            </Sidebar>            
+            </Sidebar>
+            <Player/>          
           </UserProvider>
         </SupabaseProvider>
       </body>
