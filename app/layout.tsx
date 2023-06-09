@@ -14,8 +14,8 @@ import Player from '@/components/Player'
 const font = Figtree({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Spotify Clone',
-  description: 'Spotify Clone',
+  title: 'Vibify',
+  description: 'Just Vibe',
 }
 
 export const revalidate = 0;
